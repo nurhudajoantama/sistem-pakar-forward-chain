@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DiagnoseController;
 use App\Http\Controllers\GejalaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PenyakitController;
@@ -21,6 +22,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('diagnose', [DiagnoseController::class, 'index'])->name('diagnose.index');
+Route::post('diagnose', [DiagnoseController::class, 'calculate'])->name('diagnose.calculate');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -37,3 +41,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/select2.php';

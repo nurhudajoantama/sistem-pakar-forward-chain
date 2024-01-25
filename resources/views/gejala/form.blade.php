@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.dashboard')
 
 @php
 $method = $gejala->exists ? 'PUT' : 'POST';
