@@ -3,6 +3,7 @@
 use App\Http\Controllers\GejalaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PenyakitController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::resource('gejala', GejalaController::class)->except(['show']);
     Route::resource('penyakit', PenyakitController::class)->except(['show']);
+    Route::resource('user', UserController::class)->except(['show']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -35,6 +35,13 @@
             <span>Penyakit</span></a>
     </li>
 
+    <!-- Nav Item - User -->
+    <li @class(['nav-item', 'active' => request()->is('user*')])>
+        <a class="nav-link" href="{{ route('user.index') }}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>User</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

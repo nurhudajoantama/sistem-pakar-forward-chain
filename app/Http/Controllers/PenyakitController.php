@@ -31,7 +31,7 @@ class PenyakitController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'kode_penyakit' => ['required', 'string', 'max:255', Rule::unique('penyakit', 'kode_penyakit')],
+            'kode_penyakit' => ['required', 'string', 'max:255', Rule::unique(Penyakit::class, 'kode_penyakit')],
             'nama_penyakit' => ['required', 'string', 'max:255'],
         ]);
 
@@ -62,7 +62,7 @@ class PenyakitController extends Controller
     public function update(Request $request, Penyakit $penyakit)
     {
         $data = $request->validate([
-            'kode_penyakit' => ['required', 'string', 'max:255', Rule::unique('penyakit', 'kode_penyakit')->ignore($penyakit->kode_penyakit, 'kode_penyakit')],
+            'kode_penyakit' => ['required', 'string', 'max:255', Rule::unique(Penyakit::class, 'kode_penyakit')->ignore($penyakit->kode_penyakit, 'kode_penyakit')],
             'nama_penyakit' => ['required', 'string', 'max:255'],
         ]);
 

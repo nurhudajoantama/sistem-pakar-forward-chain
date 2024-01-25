@@ -31,7 +31,7 @@ class GejalaController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'kode_gejala' => ['required', 'string', 'max:255', Rule::unique('gejala', 'kode_gejala')],
+            'kode_gejala' => ['required', 'string', 'max:255', Rule::unique(Gejala::class, 'kode_gejala')],
             'nama_gejala' => ['required', 'string', 'max:255'],
         ]);
 
@@ -62,7 +62,7 @@ class GejalaController extends Controller
     public function update(Request $request, Gejala $gejala)
     {
         $data = $request->validate([
-            'kode_gejala' => ['required', 'string', 'max:255', Rule::unique('gejala', 'kode_gejala')->ignore($gejala->kode_gejala, 'kode_gejala')],
+            'kode_gejala' => ['required', 'string', 'max:255', Rule::unique(Gejala::class, 'kode_gejala')->ignore($gejala->kode_gejala, 'kode_gejala')],
             'nama_gejala' => ['required', 'string', 'max:255'],
         ]);
 
