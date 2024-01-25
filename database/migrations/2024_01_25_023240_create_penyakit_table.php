@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('penyakit', function (Blueprint $table) {
             $table->id();
             $table->string('kode_penyakit', 5)->unique();
-            $table->string('nama');
+            $table->string('nama_penyakit');
             $table->timestamps();
         });
     }
