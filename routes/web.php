@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('diagnose', [DiagnoseController::class, 'index'])->name('diagnose.index');
 Route::post('diagnose', [DiagnoseController::class, 'calculate'])->name('diagnose.calculate');

@@ -25,6 +25,15 @@ $title = $penyakit->exists ? 'Edit' : 'Tambah';
                         <input type="text" class="form-control" id="namapenyakitInput" placeholder="Nama penyakit"
                         name="nama_penyakit" value="{{ old('nama_penyakit') ?? $penyakit->nama_penyakit }}">
                     </div>
+                    <div class="form-group">
+                        <label for="gejalaInput">Masukkan Gejala</label>
+                        <select id="gejalaInput" class="form-control" name="gejala[]" multiple="multiple" required>
+                            <option value=""></option>
+                            @foreach ($penyakit->gejala as $item)
+                            <option value="{{ $item->kode_gejala }}" selected>{{ $item->nama_gejala }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary">{{ $title }}</button>
                 </form>
             </div>
@@ -34,10 +43,33 @@ $title = $penyakit->exists ? 'Edit' : 'Tambah';
 @endsection
 
 @push('styles')
-<link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
 
 @push('scripts')
-<script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function(){
+    $('#gejalaInput').select2({
+        ajax: {
+            url: '{{ route('select2.gejala') }}',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data){
+                return {
+                    results: data.results.map((item) => {
+                        return {
+                            id: item.kode_gejala,
+                            text: item.text
+                        }
+                    })
+                }
+            },
+            cache: true
+        },
+        placeholder: 'Masukkan Gejala',
+        allowClear: false
+    })
+})
+</script>
 @endpush

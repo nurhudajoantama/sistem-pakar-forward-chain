@@ -17,10 +17,12 @@
     <nav class="py-2 bg-body-tertiary border-bottom">
         <div class="container d-flex flex-wrap">
             <ul class="nav me-auto">
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2 active"
-                        aria-current="page">Home</a></li>
-                <li class="nav-item"><a href="{{ route('diagnose.index') }}"
-                        class="nav-link link-body-emphasis px-2">Diagnose</a></li>
+                <li @class(['nav-item', 'active' => request()->is('/')])>
+                    <a href="{{route('welcome')}}" class="nav-link link-body-emphasis px-2">Home</a>
+                </li>
+                <li @class(['nav-item', 'active' => request()->is('diagnose*')])>
+                    <a href="{{ route('diagnose.index') }}" class="nav-link link-body-emphasis px-2">Diagnose</a>
+                </li>
             </ul>
             <ul class="nav">
                 <li class="nav-item"><a href="{{ route('login') }}" class="nav-link link-body-emphasis px-2">Login</a>

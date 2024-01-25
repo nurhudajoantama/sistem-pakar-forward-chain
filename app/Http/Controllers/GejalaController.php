@@ -22,6 +22,7 @@ class GejalaController extends Controller
      */
     public function create(Gejala $gejala)
     {
+        $gejala->load('penyakit');
         return view('gejala.form', compact('gejala'));
     }
 
@@ -33,9 +34,12 @@ class GejalaController extends Controller
         $data = $request->validate([
             'kode_gejala' => ['required', 'string', 'max:255', Rule::unique(Gejala::class, 'kode_gejala')],
             'nama_gejala' => ['required', 'string', 'max:255'],
+            'penyakit' => ['required', 'array'],
+            'penyakit.*' => ['required', 'string', 'exists:penyakit,kode_penyakit'],
         ]);
 
-        Gejala::create($data);
+        $gejala = Gejala::create($data);
+        $gejala->penyakit()->sync($request->penyakit);
 
         return to_route('gejala.index')->with('success', 'Data berhasil disimpan');
     }
@@ -53,6 +57,7 @@ class GejalaController extends Controller
      */
     public function edit(Gejala $gejala)
     {
+        $gejala->load('penyakit');
         return view('gejala.form', compact('gejala'));
     }
 
@@ -64,9 +69,12 @@ class GejalaController extends Controller
         $data = $request->validate([
             'kode_gejala' => ['required', 'string', 'max:255', Rule::unique(Gejala::class, 'kode_gejala')->ignore($gejala->kode_gejala, 'kode_gejala')],
             'nama_gejala' => ['required', 'string', 'max:255'],
+            'penyakit' => ['required', 'array'],
+            'penyakit.*' => ['required', 'string', 'exists:penyakit,kode_penyakit'],
         ]);
 
         $gejala->update($data);
+        $gejala->penyakit()->sync($request->penyakit);
 
         return to_route('gejala.index')->with('success', 'Data berhasil disimpan');
     }
