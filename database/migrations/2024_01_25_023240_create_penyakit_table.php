@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('penyakit', function (Blueprint $table) {
-            $table->id();
             $table->string('kode_penyakit', 5)->unique();
             $table->string('nama_penyakit');
             $table->timestamps();
