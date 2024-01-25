@@ -11,7 +11,7 @@ class Penyakit extends Model
 
     protected $table = 'penyakit';
 
-    protected $primaryKey = 'kode_gejala';
+    protected $primaryKey = 'kode_penyakit';
     public $incrementing = false;
     protected $keyType = 'string';
 

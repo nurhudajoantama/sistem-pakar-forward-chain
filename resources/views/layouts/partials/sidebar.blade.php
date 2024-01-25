@@ -28,11 +28,11 @@
             <span>Gejala</span></a>
     </li>
 
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
+    <!-- Nav Item - Penyakit -->
+    <li @class(['nav-item', 'active' => request()->is('penyakit*')])>
+        <a class="nav-link" href="{{ route('penyakit.index') }}">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Penyakit</span></a>
     </li>
 
     <!-- Divider -->
